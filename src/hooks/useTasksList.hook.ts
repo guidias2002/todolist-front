@@ -8,10 +8,11 @@ async function listAllTasks(): Promise<Task[]> {
     return response.data;
 }
 
-export default function useTasksList() {
+export default function useTasksList(selectedStatus: string) {
     const { isLoading, isError, data } = useQuery({
         queryKey: ['tasksList'],
         queryFn: listAllTasks,
+        enabled: selectedStatus === "TODAS"
     });
 
     return {
