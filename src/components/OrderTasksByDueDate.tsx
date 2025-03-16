@@ -14,7 +14,7 @@ const OrderTasksByDueDate: React.FC<OrderTasksProps> = ({ onOrder }) => {
             color="primary"
             onClick={onOrder}
         >
-            Ordernar por data
+            Ordernar todas por data
         </Button>
     );
 };

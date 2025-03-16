@@ -1,13 +1,18 @@
-import { useState } from "react";
 import { MenuItem, FormControl, Select, InputLabel, SelectChangeEvent } from "@mui/material";
+import { SelectableTaskStatus } from "../shared/enums/TaskStatusEnum";
 
-export default function FilterSelectByStatus({ onChange }: { onChange: (status: string) => void }) {
-  const [selectedStatus, setSelectedStatus] = useState("TODAS");
+interface FilterSelectByStatusProps {
+  onChange: (status: SelectableTaskStatus) => void;
+  selectedStatus: SelectableTaskStatus;   
+  setSelectedStatus: any;
+}
+
+export default function FilterSelectByStatus({ onChange, selectedStatus, setSelectedStatus }: FilterSelectByStatusProps) {
 
   const handleStatusChange = (event: SelectChangeEvent) => {
     const newStatus = event.target.value;
     setSelectedStatus(newStatus);
-    onChange(newStatus);
+    onChange(newStatus as SelectableTaskStatus);
   };
 
   return (
@@ -21,10 +26,10 @@ export default function FilterSelectByStatus({ onChange }: { onChange: (status: 
           onChange={handleStatusChange}
           label="Filtrar por status"
         >
-          <MenuItem value="TODAS">Todas</MenuItem>
-          <MenuItem value="PENDENTE">Pendente</MenuItem>
-          <MenuItem value="EM_ANDAMENTO">Em andamento</MenuItem>
-          <MenuItem value="CONCLUIDO">Concluído</MenuItem>
+          <MenuItem value={SelectableTaskStatus.TODAS}>Todas</MenuItem>
+          <MenuItem value={SelectableTaskStatus.PENDENTE}>Pendente</MenuItem>
+          <MenuItem value={SelectableTaskStatus.EM_ANDAMENTO}>Em andamento</MenuItem>
+          <MenuItem value={SelectableTaskStatus.CONCLUIDO}>Concluído</MenuItem>
         </Select>
       </FormControl>
     </div>

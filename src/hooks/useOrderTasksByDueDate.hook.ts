@@ -18,6 +18,6 @@ export default function useOrderTasksByDueDate(shouldFetch: boolean) {
     return {
         isLoadingOrderTasksByDueDate: isLoading,
         isErrorOrderTasksByDueDate: isError,
-        orderedTasks: data,
+        orderedTasksByDueDate: data,
     };
 }
