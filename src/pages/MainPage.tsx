@@ -6,24 +6,38 @@ import { useState } from "react";
 import useTasksByStatus from "../hooks/useTasksByStatus.hook";
 import OrderTasksByDueDate from "../components/OrderTasksByDueDate";
 import { Task } from "../shared/types/Task";
+import useOrderTasksByDueDate from "../hooks/useOrderTasksByDueDate.hook";
 
 export default function MainPage() {
     const [selectedStatus, setSelectedStatus] = useState("TODAS");
-    const [orderedTasks, setOrderedTasks] = useState<Task[] | null>(null);
+    const [shouldFetchByDueDate, setShouldFetchByDueDate] = useState<boolean>(false);
 
     const { isErrorTasksList, isLoadingTasksList, tasksList } = useTasksList(selectedStatus);
     const { isErrorTasksListByStatus, isLoadingTasksListByStatus, tasksListByStatus } = useTasksByStatus(selectedStatus);
+    const { orderedTasks, isErrorOrderTasksByDueDate, isLoadingOrderTasksByDueDate } = useOrderTasksByDueDate(shouldFetchByDueDate)
 
     const handleStatusChange = (status: string) => {
+        setShouldFetchByDueDate(false);
         setSelectedStatus(status);
-        setOrderedTasks(null);
     };
 
-    const handleOrderTasks = (tasks: Task[]) => {
-        setOrderedTasks(tasks);
+    const handleOrderTasksByDueDate = () => {
+        setSelectedStatus("TODAS")
+        setShouldFetchByDueDate(true);
     };
 
-    const tasksToDisplay = selectedStatus === "TODAS" ? tasksList : tasksListByStatus;
+    let tasksToDisplay: Task[] = [];
+
+    if (selectedStatus === 'TODAS' && !shouldFetchByDueDate && tasksList) {
+        tasksToDisplay = tasksList;
+    }
+    if (selectedStatus !== 'TODAS' && tasksListByStatus) {
+        tasksToDisplay = tasksListByStatus;
+    }
+    if (shouldFetchByDueDate && orderedTasks) {
+        tasksToDisplay = orderedTasks;
+    }
+
     const isError = selectedStatus === "TODAS" ? isErrorTasksList : isErrorTasksListByStatus;
     const isLoading = selectedStatus === "TODAS" ? isLoadingTasksList : isLoadingTasksListByStatus;
 
@@ -34,7 +48,7 @@ export default function MainPage() {
 
                 <div className="flex gap-2">
                     <FilterSelectByStatus onChange={handleStatusChange} />
-                    <OrderTasksByDueDate onOrder={handleOrderTasks} />
+                    <OrderTasksByDueDate onOrder={handleOrderTasksByDueDate}/>
                 </div>
             </div>
 

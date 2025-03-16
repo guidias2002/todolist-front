@@ -4,19 +4,17 @@ import SortIcon from "@mui/icons-material/Sort";
 
 type OrderTasksProps = {
     onOrder: () => void;
-    isLoading: boolean;
 };
 
-const OrderTasksByDueDate: React.FC<OrderTasksProps> = ({ onOrder, isLoading }) => {
+const OrderTasksByDueDate: React.FC<OrderTasksProps> = ({ onOrder }) => {
     return (
         <Button
             variant="contained"
             startIcon={<SortIcon />}
             color="primary"
             onClick={onOrder}
-            disabled={isLoading}
         >
-            {isLoading ? "Carregando..." : "Ordenar por data"}
+            Ordernar por data
         </Button>
     );
 };
