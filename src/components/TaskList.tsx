@@ -1,20 +1,31 @@
-import useTasksList from "../hooks/useTasksList.hook"
+import { Task } from "../shared/types/Task";
 import CardTask from "./CardTask";
+import EmptyList from "./EmptyList";
+import ErrorMessage from "./ErrorMessage";
+import Loading from "./Loading";
 
-export default function TaskList() {
+interface TaskListProps {
+    tasksList: Task[];
+    error: boolean;
+    loading: boolean;
+}
 
-    const { isErrorTasksList, isLoadingTasksList, tasksList } = useTasksList();
+export default function TaskList({ tasksList, error, loading }: TaskListProps) {
 
-    if (isLoadingTasksList) {
-        return <div>ta com pressa? ta carregando</div>
+    if (loading) {
+        return <Loading />
     }
 
-    if (isErrorTasksList || !tasksList) {
-        return <div>deu erro nessa merda</div>
+    if (error) {
+        return <ErrorMessage message="Ocorreu um problema ao buscar a lista de tarefas. Por favor tente novamente mais tarde." />
+    }
+
+    if (tasksList.length == 0) {
+        return <EmptyList />;
     }
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {tasksList.map((task) => (
                 <div className="h-[200px]">
                     <CardTask key={task.id} task={task} />

@@ -1,6 +1,7 @@
 import { Task } from "../shared/types/Task"
 import BorderColorTwoToneIcon from '@mui/icons-material/BorderColorTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
+import { Divider } from "@mui/material";
 
 interface CardTaskProps {
     task: Task;
@@ -28,21 +29,22 @@ export default function CardTask({ task }: CardTaskProps) {
                                 : "Pendente"}
                     </span>
                 </div>
+                <Divider />
                 <p className="text-sm text-gray-600 line-clamp-3">
                     {task.description}
                 </p>
             </div>
 
             <div className="flex justify-between items-center text-sm text-gray-500 mt-4">
-                
+
                 <div>
                     <p className="font-semibold text-gray-800">Data de vencimento</p>
                     <p>{task.dueDate}</p>
                 </div>
 
                 <div className="flex gap-2">
-                <BorderColorTwoToneIcon style={{ color: '#000', fontSize: '24px' }} />
-                <DeleteTwoToneIcon style={{ color: '#DC2626', fontSize: '24px' }} />
+                    <BorderColorTwoToneIcon style={{ color: '#000', fontSize: '24px' }} />
+                    <DeleteTwoToneIcon style={{ color: '#DC2626', fontSize: '24px' }} />
                 </div>
             </div>
         </div>
