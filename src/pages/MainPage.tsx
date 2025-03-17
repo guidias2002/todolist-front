@@ -79,12 +79,16 @@ export default function MainPage() {
                         />
                         <OrderTasksByDueDate onOrder={handleOrderTasksByDueDate} />
 
-                        <Button onClick={handleOpenForm} className="h-12 py-2 flex items-center gap-2 whitespace-nowrap">
-                            <AddCircleOutlineIcon className="text-blue-700" />
+                        <Button
+                            startIcon={<AddCircleOutlineIcon />}
+                            variant="outlined"
+                            onClick={handleOpenForm}
+                            className="h-12 py-2 flex items-center gap-2 whitespace-nowrap"
+                        >
                             Adicionar tarefa
                         </Button>
 
-                        
+
 
                         <TaskForm open={openForm} handleClose={handleCloseForm} />
                     </div>
