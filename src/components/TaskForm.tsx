@@ -1,8 +1,10 @@
-import { Button, Dialog, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
+import { Alert, Button, Dialog, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Snackbar, TextField } from "@mui/material";
 import { useState } from "react";
 import { Task } from "../shared/types/Task";
 import { TaskStatusEnum } from "../shared/enums/TaskStatusEnum";
 import AddTaskIcon from '@mui/icons-material/AddTask';
+import useCreatetASK from "../hooks/useCreateTask.hook";
+import useCreateTask from "../hooks/useCreateTask.hook";
 
 const statusLabels: Record<TaskStatusEnum, string> = {
     [TaskStatusEnum.PENDENTE]: "Pendente",
@@ -17,6 +19,9 @@ interface TaskFormProps {
 
 
 export default function TaskForm({ open, handleClose }: TaskFormProps) {
+    const userIdLogged = JSON.parse(localStorage.getItem("user") || '{}').id;
+    const { mutate: createTask } = useCreateTask();
+    const [toast, setToast] = useState({ open: false, message: "", severity: "success" });
     const [formData, setFormData] = useState<Task>({
         title: "",
         description: "",
@@ -90,6 +95,23 @@ export default function TaskForm({ open, handleClose }: TaskFormProps) {
         return isValid;
     };
 
+    const handleSubmit = () => {
+        if (!validate()) return;
+
+        createTask({ newTask: formData, userId: userIdLogged }, {
+            onSuccess: () => {
+                setToast({ open: true, message: "Usuário cadastrado com sucesso!", severity: "success" });
+                setFormData({ title: "", description: "", dueDate: "", status: TaskStatusEnum.PENDENTE });
+                setErrors({ title: "", description: "", dueDate: "", status: "" });
+                handleClose();
+                window.location.reload();
+            },
+            onError: (error: any) => {
+                setToast({ open: true, message: "Erro ao cadastrar tarefa!", severity: "error" });
+            }
+        });
+    }
+
     return (
         <Dialog className="flex items-center justify-center min-h-screen" open={open} onClose={handleClose}>
             <div className="flex flex-col bg-white shadow-lg rounded-xl p-6 w-[500px] max-w-md gap-4">
@@ -127,7 +149,6 @@ export default function TaskForm({ open, handleClose }: TaskFormProps) {
                 <TextField
                     id="dueDate"
                     name="dueDate"
-                    label="Data de vencimento"
                     variant="outlined"
                     fullWidth
                     type="date"
@@ -152,8 +173,22 @@ export default function TaskForm({ open, handleClose }: TaskFormProps) {
                     </Select>
                 </FormControl>
 
-                <Button>Cadastrar tarefa</Button>
+                <div className="flex justify-end items-center gap-2">
+                    <Button onClick={handleClose} variant="outlined">Cancelar</Button>
+                    <Button onClick={handleSubmit} color="primary" variant="contained">Cadastrar</Button>
+                </div>
             </div>
+
+            <Snackbar
+                open={toast.open}
+                autoHideDuration={3000}
+                onClose={() => setToast({ ...toast, open: false })}
+                anchorOrigin={{ vertical: "top", horizontal: "right" }}
+            >
+                <Alert onClose={() => setToast({ ...toast, open: false })} severity={toast.severity as any} variant="filled">
+                    {toast.message}
+                </Alert>
+            </Snackbar>
         </Dialog>
     )
 }

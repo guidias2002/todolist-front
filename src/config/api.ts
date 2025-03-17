@@ -9,7 +9,8 @@ export const taskEndpoints = {
     TASKS_FINDALL: "/task/findAll",
     TASKS_FINDALL_BY_STATUS: "/task/findByStatus/",
     TASKS_ORDER_BY_DUEDATE: "task/orderByDueDate",
-    TASK_DELETE: (taskId: number, userId: number) => `/task/deleteTask/taskId/${taskId}/userId/${userId}`
+    TASK_DELETE: (taskId: number, userId: number) => `/task/deleteTask/taskId/${taskId}/userId/${userId}`,
+    TASK_CREATE: (userId: number) => `/task/create/userId/${userId}`
 }
 
 export const userEndpoints = {
