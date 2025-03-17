@@ -8,6 +8,8 @@ import OrderTasksByDueDate from "../components/OrderTasksByDueDate";
 import { Task } from "../shared/types/Task";
 import useOrderTasksByDueDate from "../hooks/useOrderTasksByDueDate.hook";
 import { SelectableTaskStatus } from "../shared/enums/TaskStatusEnum";
+import { Button } from "@mui/material";
+import { useAuth } from "../providers/AuthProvider";
 
 export default function MainPage() {
     const [selectedStatus, setSelectedStatus] = useState<SelectableTaskStatus>(SelectableTaskStatus.TODAS);
@@ -16,6 +18,7 @@ export default function MainPage() {
     const { isErrorTasksList, isLoadingTasksList, tasksList } = useTasksList(selectedStatus);
     const { isErrorTasksListByStatus, isLoadingTasksListByStatus, tasksListByStatus } = useTasksByStatus(selectedStatus);
     const { orderedTasksByDueDate, isErrorOrderTasksByDueDate, isLoadingOrderTasksByDueDate } = useOrderTasksByDueDate(shouldFetchByDueDate)
+    const { logout } = useAuth();
 
     const handleStatusChange = (status: SelectableTaskStatus) => {
         setShouldFetchByDueDate(false);
@@ -26,6 +29,10 @@ export default function MainPage() {
         setSelectedStatus(SelectableTaskStatus.TODAS)
         setShouldFetchByDueDate(true);
     };
+
+    const handleLogout = () => {
+        logout();
+    }
 
     let tasksToDisplay: Task[] = [];
     let isError: boolean = false;
@@ -60,6 +67,7 @@ export default function MainPage() {
 
             <Divider />
             <TaskList tasksList={tasksToDisplay} error={isError} loading={isLoading} />
+            <Button onClick={handleLogout}>Sair</Button>
         </div>
     );
 }

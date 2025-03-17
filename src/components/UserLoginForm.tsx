@@ -1,13 +1,11 @@
-import { Button, IconButton, InputAdornment, TextField } from "@mui/material";
+import { Button, IconButton, InputAdornment, TextField, CircularProgress } from "@mui/material";
 import { useState } from "react";
 import { Login } from "../shared/types/Login";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import useLogin from "../hooks/useLogin.hook";
-import { useNavigate } from "react-router-dom";
-import { paths } from "../shared/paths";
+import { useAuth } from "../providers/AuthProvider";
 
 export default function UserLoginForm() {
-    const navigate = useNavigate();
+    const { login, isPending, error } = useAuth();
     const [formData, setFormData] = useState<Login>({
         email: "",
         password: "",
@@ -20,22 +18,10 @@ export default function UserLoginForm() {
 
     const [showPassword, setShowPassword] = useState(false);
 
-    const { mutate, isError } = useLogin();
-
     const handleSubmit = () => {
         if (!validate()) return;
 
-        mutate(formData, {
-            onSuccess: () => {
-                navigate(paths.MAIN)
-            },
-            onError: () => {
-                setErrors((prev) => ({
-                    ...prev,
-                    email: "Login inválido. Tente novamente.",
-                }));
-            },
-        });
+        login(formData); 
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,9 +93,15 @@ export default function UserLoginForm() {
                 variant="contained"
                 color="primary"
                 onClick={handleSubmit}
+                disabled={isPending} 
             >
-                Entrar
+                {isPending ? <CircularProgress size={24} color="inherit" /> : "Entrar"}
             </Button>
+            {error && (
+                <div style={{ color: 'red', marginTop: '8px' }}>
+                    {error}
+                </div>
+            )}
         </div>
     );
 }

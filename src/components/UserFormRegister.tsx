@@ -20,7 +20,7 @@ export default function UserFormRegister() {
     const [showPassword, setShowPassword] = useState(false);
     const [toast, setToast] = useState({ open: false, message: "", severity: "success" });
 
-    const { mutate: createUser, isError: isErrorCreateUser, isPending: isLoadingCreateUser } = useCreateUser();
+    const { mutate: createUser, isPending: isLoadingCreateUser } = useCreateUser();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
