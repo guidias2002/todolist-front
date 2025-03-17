@@ -59,9 +59,18 @@ export default function CardTask({ task }: CardTaskProps) {
                     <p>{task.dueDate}</p>
                 </div>
 
-                <div className="flex gap-2">
-                    <BorderColorTwoToneIcon style={{ color: '#000', fontSize: '24px' }} />
-                    <DeleteTwoToneIcon onClick={() => handleDeleteTask(task.id, userIdLogged)} style={{ color: '#DC2626', fontSize: '24px' }} />
+                <div className="flex gap-3">
+                    <BorderColorTwoToneIcon
+                        className="text-black text-3xl cursor-pointer p-1 rounded-md hover:bg-gray-200 transition"
+                    />
+                    <DeleteTwoToneIcon
+                        onClick={() => {
+                            if (task.id !== undefined && userIdLogged !== undefined) {
+                                handleDeleteTask(task.id, userIdLogged);
+                            }
+                        }}
+                        className="text-red-600 text-3xl cursor-pointer p-1 rounded-md hover:bg-red-100 transition"
+                    />
                 </div>
             </div>
 
