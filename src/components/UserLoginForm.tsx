@@ -94,6 +94,7 @@ export default function UserLoginForm() {
                 color="primary"
                 onClick={handleSubmit}
                 disabled={isPending} 
+                type="submit"
             >
                 {isPending ? <CircularProgress size={24} color="inherit" /> : "Entrar"}
             </Button>
