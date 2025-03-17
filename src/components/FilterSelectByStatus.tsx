@@ -3,12 +3,11 @@ import { SelectableTaskStatus } from "../shared/enums/TaskStatusEnum";
 
 interface FilterSelectByStatusProps {
   onChange: (status: SelectableTaskStatus) => void;
-  selectedStatus: SelectableTaskStatus;   
+  selectedStatus: SelectableTaskStatus;
   setSelectedStatus: any;
 }
 
 export default function FilterSelectByStatus({ onChange, selectedStatus, setSelectedStatus }: FilterSelectByStatusProps) {
-
   const handleStatusChange = (event: SelectChangeEvent) => {
     const newStatus = event.target.value;
     setSelectedStatus(newStatus);
@@ -16,7 +15,7 @@ export default function FilterSelectByStatus({ onChange, selectedStatus, setSele
   };
 
   return (
-    <div className="w-full max-w-xs">
+    <div className="min-w-[200px]">
       <FormControl fullWidth>
         <InputLabel id="status-filter-label">Filtrar por status</InputLabel>
         <Select
@@ -25,6 +24,8 @@ export default function FilterSelectByStatus({ onChange, selectedStatus, setSele
           value={selectedStatus}
           onChange={handleStatusChange}
           label="Filtrar por status"
+          size="medium"
+          className="h-12"
         >
           <MenuItem value={SelectableTaskStatus.TODAS}>Todas</MenuItem>
           <MenuItem value={SelectableTaskStatus.PENDENTE}>Pendente</MenuItem>
@@ -35,3 +36,4 @@ export default function FilterSelectByStatus({ onChange, selectedStatus, setSele
     </div>
   );
 }
+

@@ -56,14 +56,19 @@ export default function MainPage() {
 
     return (
         <div className="flex flex-col gap-4 p-4">
-            <div className="flex justify-between items-center">
+            <div className="flex flex-wrap sm:flex-nowrap justify-between items-center gap-4">
                 <h1 className="text-3xl font-semibold text-gray-800">Tarefas</h1>
 
-                <div className="flex gap-2">
-                    <FilterSelectByStatus onChange={handleStatusChange} selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus}/>
-                    <OrderTasksByDueDate onOrder={handleOrderTasksByDueDate}/>
+                <div className="flex flex-wrap justify-start sm:justify-end items-center gap-4 w-full sm:w-auto max-w-lg">
+                    <FilterSelectByStatus
+                        onChange={handleStatusChange}
+                        selectedStatus={selectedStatus}
+                        setSelectedStatus={setSelectedStatus}
+                    />
+                    <OrderTasksByDueDate onOrder={handleOrderTasksByDueDate} />
                 </div>
             </div>
+
 
             <Divider />
             <TaskList tasksList={tasksToDisplay} error={isError} loading={isLoading} />
