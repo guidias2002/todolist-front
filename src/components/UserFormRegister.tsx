@@ -132,7 +132,7 @@ export default function UserFormRegister() {
 
             <Snackbar
                 open={toast.open}
-                autoHideDuration={4000}
+                autoHideDuration={3000}
                 onClose={() => setToast({ ...toast, open: false })}
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
             >
