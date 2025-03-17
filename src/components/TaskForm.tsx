@@ -69,6 +69,8 @@ export default function TaskForm({ open, handleClose }: TaskFormProps) {
         }));
     };
 
+    const today: Date = new Date();
+    today.setHours(0, 0, 0, 0);
 
     const validate = () => {
         let newErrors = { title: "", description: "", status: "", dueDate: "" };
@@ -87,10 +89,20 @@ export default function TaskForm({ open, handleClose }: TaskFormProps) {
             isValid = false;
         }
         if (!formData.dueDate) {
-            newErrors.status = "A data de vencimento é obrigatória.";
+            newErrors.dueDate = "A data de vencimento é obrigatória.";
             isValid = false;
-        }
+        } else {
+            const [year, month, day] = formData.dueDate.split("-").map(Number);
+            const dueDate: Date = new Date(year, month - 1, day);
 
+            if (isNaN(dueDate.getTime())) {
+                newErrors.dueDate = "Data de vencimento inválida.";
+                isValid = false;
+            } else if (dueDate < today) {
+                newErrors.dueDate = "A data de vencimento não pode ser anterior à data atual.";
+                isValid = false;
+            }
+        }
         setErrors(newErrors);
         return isValid;
     };

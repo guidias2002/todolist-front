@@ -2,9 +2,9 @@ import { TaskStatusEnum } from "../enums/TaskStatusEnum";
 
 export interface Task {
     id?: number,
-    title: String,
-    description: String,
-    dueDate: String,
+    title: string,
+    description: string,
+    dueDate: string,
     status: TaskStatusEnum,
     userId?: number
 }
