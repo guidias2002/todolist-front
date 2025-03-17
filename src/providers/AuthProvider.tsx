@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from "react";
 import useLogin from "../hooks/useLogin.hook";
 import { Login, LoginResponse } from "../shared/types/Login";
 import { paths } from "../shared/paths";
+import { useNavigate } from "react-router-dom";
 
 interface AuthContextType {
     user: LoginResponse | null;
@@ -14,10 +15,14 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-    const [user, setUser] = useState<LoginResponse | null>(null);
+    const [user, setUser] = useState<LoginResponse | null>(() => {
+        const storedUser = localStorage.getItem("user");
+        return storedUser ? JSON.parse(storedUser) : null;
+    });
 
     const { mutate, isPending } = useLogin();
     const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     const login = (credentials: Login) => {
         mutate(credentials, {
@@ -26,7 +31,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 setError(null);
                 console.log("success")
                 localStorage.setItem("user", JSON.stringify(data));
-                window.location.href = paths.MAIN;
+                navigate(paths.MAIN);
             },
             onError: () => {
                 setError("Login inválido. Verifique suas credenciais.");
@@ -37,7 +42,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const logout = () => {
         setUser(null);
         localStorage.removeItem("user");
-        window.location.href = paths.LOGIN;
+        navigate(paths.LOGIN);
     };
 
     return (

@@ -11,8 +11,8 @@ function App() {
 
   return (
     <QueryProvider>
-      <AuthProvider>
-        <Router>
+      <Router>
+        <AuthProvider>
           <Routes>
             <Route element={<PrivateRoute />}>
               <Route path={paths.MAIN} element={<MainPage />} />
@@ -20,8 +20,8 @@ function App() {
             <Route path={paths.CREATE_USER} element={<RegisterUserPage />} />
             <Route path={paths.LOGIN} element={<LoginPage />} />
           </Routes>
-        </Router>
-      </AuthProvider>
+        </AuthProvider>
+      </Router>
     </QueryProvider>
   )
 }
