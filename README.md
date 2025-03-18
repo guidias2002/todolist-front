@@ -53,6 +53,26 @@ A aplicação possui três páginas principais:
 ## Integração com Backend  
 Todos os dados da aplicação são obtidos e manipulados por meio de uma API backend. Os endpoints são consumidos via requisições HTTP, garantindo que o sistema mantenha persistência das informações e funcione de forma dinâmica.  
 
+# Endpoints Utilizados
+
+## Base URL
+VITE_BASE_API=http://localhost:8080
+
+
+## Endpoints de Tarefas
+
+- **GET** `/task/findAll` - Retorna todas as tarefas
+- **GET** `/task/findByStatus/{status}` - Retorna tarefas filtradas por status
+- **GET** `/task/orderByDueDate` - Retorna todas as tarefas ordenadas por data de vencimento
+- **DELETE** `/task/deleteTask/taskId/{taskId}/userId/{userId}` - Exclui uma tarefa do usuário
+- **POST** `/task/create/userId/{userId}` - Cria uma nova tarefa para o usuário
+- **PUT** `/task/update/taskId/{taskId}/userId/{userId}` - Atualiza uma tarefa do usuário
+
+## Endpoints de Usuários
+
+- **POST** `/user/create` - Cria um novo usuário
+- **POST** `/user/login` - Autentica um usuário e retorna um token
+
 
 ## Como Rodar o Projeto
 
