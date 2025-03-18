@@ -53,6 +53,8 @@ A aplicação possui três páginas principais:
 ## Integração com Backend  
 Todos os dados da aplicação são obtidos e manipulados por meio de uma API backend. Os endpoints são consumidos via requisições HTTP, garantindo que o sistema mantenha persistência das informações e funcione de forma dinâmica.  
 
+A API backend pode ser encontrada nesse link: https://github.com/guidias2002/todolist-back
+
 # Endpoints Utilizados
 
 ## Base URL
