@@ -66,7 +66,7 @@ VITE_BASE_API=http://localhost:8080
 - **GET** `/task/orderByDueDate` - Retorna todas as tarefas ordenadas por data de vencimento
 - **DELETE** `/task/deleteTask/taskId/{taskId}/userId/{userId}` - Exclui uma tarefa do usuário
 - **POST** `/task/create/userId/{userId}` - Cria uma nova tarefa para o usuário
-- **PUT** `/task/update/taskId/{taskId}/userId/{userId}` - Atualiza uma tarefa do usuário
+- **PATCH** `/task/update/taskId/{taskId}/userId/{userId}` - Atualiza uma tarefa do usuário
 
 ## Endpoints de Usuários
 
