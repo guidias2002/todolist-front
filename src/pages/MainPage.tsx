@@ -68,10 +68,10 @@ export default function MainPage() {
     return (
         <div className="flex flex-col gap-4 p-4">
             <div className="flex flex-col gap-4 p-4 w-full">
-                <div className="flex flex-wrap sm:flex-nowrap justify-between items-center gap-4 w-full">
-                    <h1 className="text-3xl font-semibold text-gray-800">Tarefas</h1>
+                <div className="flex flex-wrap sm:flex-nowrap justify-between items-start gap-4 w-full">
+                    <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800">Tarefas</h1>
 
-                    <div className="flex flex-row flex-wrap sm:flex-nowrap justify-start sm:justify-end items-center gap-4 w-full sm:w-auto">
+                    <div className="flex flex-col sm:flex-row items-start gap-2 sm:gap-4 w-full sm:w-auto">
                         <FilterSelectByStatus
                             onChange={handleStatusChange}
                             selectedStatus={selectedStatus}
@@ -83,7 +83,7 @@ export default function MainPage() {
                             startIcon={<AddCircleOutlineIcon />}
                             variant="outlined"
                             onClick={handleOpenForm}
-                            className="h-12 py-2 flex items-center gap-2 whitespace-nowrap"
+                            className="h-12 py-2 flex items-center gap-2 whitespace-nowrap w-full sm:w-auto"
                         >
                             Adicionar tarefa
                         </Button>
@@ -92,6 +92,7 @@ export default function MainPage() {
                     </div>
                 </div>
             </div>
+
 
 
             <Divider />

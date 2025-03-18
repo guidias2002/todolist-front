@@ -125,7 +125,7 @@ export default function TaskCrateForm({ open, handleClose }: TaskFormProps) {
 
     return (
         <Dialog className="flex items-center justify-center min-h-screen" open={open} onClose={handleClose}>
-            <div className="flex flex-col bg-white shadow-lg rounded-xl p-6 w-[500px] max-w-md gap-4">
+            <div className="flex flex-col bg-white shadow-lg rounded-xl p-6 w-[360px] max-w-md gap-4">
                 <div className="flex items-center justify-center gap-2">
                     <AddTaskIcon className="text-gray-700 text-3xl" />
                     <h1 className="text-2xl font-semibold text-gray-800">
