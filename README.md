@@ -56,7 +56,7 @@ Todos os dados da aplicação são obtidos e manipulados por meio de uma API bac
 # Endpoints Utilizados
 
 ## Base URL
-VITE_BASE_API=http://localhost:8080
+http://localhost:8080
 
 
 ## Endpoints de Tarefas
@@ -71,15 +71,15 @@ VITE_BASE_API=http://localhost:8080
 ## Endpoints de Usuários
 
 - **POST** `/user/create` - Cria um novo usuário
-- **POST** `/user/login` - Autentica um usuário e retorna um token
+- **POST** `/user/login` - Autentica um usuário
 
 
 ## Como Rodar o Projeto
 
 ### Pré-requisitos
 Certifique-se de ter instalado:
-- [Node.js](https://nodejs.org/)
-- Gerenciador de pacotes npm ou yarn
+- [Node.js](https://nodejs.org/) - Versão mínima 18.x ou superior
+- Gerenciador de pacotes npm
 
 ### Passos para execução
 
@@ -94,14 +94,10 @@ Certifique-se de ter instalado:
 3. Instale as dependências:
    ```sh
    npm install  
-   # ou
-   yarn install
    ```
 4. Inicie o servidor de desenvolvimento:
    ```sh
    npm run dev  
-   # ou
-   yarn dev
    ```
 5. Acesse no navegador: `http://localhost:sua-porta`
 
