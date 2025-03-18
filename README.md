@@ -1,54 +1,71 @@
-# React + TypeScript + Vite
+# User Task Manager - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto é um sistema de gerenciamento de tarefas desenvolvido com React e TypeScript. Ele permite que os usuários se cadastrem, façam login e gerenciem suas tarefas de forma intuitiva.
 
-Currently, two official plugins are available:
+## Tecnologias Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React.js
+- TypeScript
+- Material-UI (para UI/UX)
+- React Router (para navegação)
+- Context API ou Redux (para gerenciamento de estado, se aplicável)
+- Axios (para chamadas à API, se houver backend)
 
-## Expanding the ESLint configuration
+## Funcionalidades
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Cadastro de Usuários
+- Criar uma conta (registro com nome, e-mail e senha) ✅
+- Tela de login com e-mail e senha ✅
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Gerenciamento de Tarefas
+- Criar, editar, excluir e listar tarefas ✅
+- Cada tarefa contém:
+  - **Título** ✅
+  - **Descrição** ✅
+  - **Status** (Pendente, Em Andamento, Concluído) ✅
+  - **Data de vencimento** ✅
+- Apenas o criador da tarefa pode editá-la ou excluí-la ✅
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Filtragem e Ordenação
+- Filtrar tarefas por status ✅
+- Ordenar tarefas por data de vencimento ✅
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Estrutura das Páginas
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+A aplicação possui três páginas principais:
+
+1. **Login:** Tela onde os usuários inserem e-mail e senha para acessar a aplicação.
+2. **Cadastro:** Tela para criação de nova conta.
+3. **Main Page:** Página principal onde as tarefas são listadas, podendo ser filtradas, ordenadas e gerenciadas.
+
+## Como Rodar o Projeto
+
+### Pré-requisitos
+Certifique-se de ter instalado:
+- [Node.js](https://nodejs.org/)
+- Gerenciador de pacotes npm ou yarn
+
+### Passos para execução
+
+1. Clone este repositório:
+   ```sh
+   git clone https://github.com/seu-usuario/nome-do-repositorio.git
+   ```
+2. Acesse o diretório do projeto:
+   ```sh
+   cd nome-do-repositorio
+   ```
+3. Instale as dependências:
+   ```sh
+   npm install  
+   # ou
+   yarn install
+   ```
+4. Inicie o servidor de desenvolvimento:
+   ```sh
+   npm run dev  
+   # ou
+   yarn dev
+   ```
+5. Acesse no navegador: `http://localhost:3000`
+
