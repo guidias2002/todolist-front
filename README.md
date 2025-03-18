@@ -29,8 +29,8 @@ Este projeto é um sistema de gerenciamento de tarefas desenvolvido com React e 
 ## Filtragem e Ordenação
 
 ### Filtrar tarefas por status ✅
-- Ao utilizar o filtro de status, as tarefas são automaticamente ordenadas por data de vencimento.
 - O filtro retorna a lista de tarefas conforme a resposta do endpoint, considerando apenas as tarefas com o status selecionado.
+- Ao utilizar o filtro de status, as tarefas são automaticamente ordenadas por data de vencimento.
 
 ### Ordenar tarefas por data de vencimento ✅
 - A ordenação retorna todas as tarefas, independentemente do status, organizadas em ordem crescente de data de vencimento.
