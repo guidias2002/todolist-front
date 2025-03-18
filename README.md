@@ -33,7 +33,7 @@ Este projeto é um sistema de gerenciamento de tarefas desenvolvido com React e 
 - O filtro retorna a lista de tarefas conforme a resposta do endpoint, considerando apenas as tarefas com o status selecionado.
 
 ### Ordenar tarefas por data de vencimento ✅
-- A ordenação retorna todas as tarefas, independentemente do status, organizadas em ordem crescente ou decrescente de data de vencimento.
+- A ordenação retorna todas as tarefas, independentemente do status, organizadas em ordem crescente de data de vencimento.
 
 ### Uso exclusivo de filtros e ordenação
 - Apenas um filtro ou ordenação pode ser aplicado por vez.
@@ -48,6 +48,11 @@ A aplicação possui três páginas principais:
 1. **Login:** Tela onde os usuários inserem e-mail e senha para acessar a aplicação.
 2. **Cadastro:** Tela para criação de nova conta.
 3. **Main Page:** Página principal onde as tarefas são listadas, podendo ser filtradas, ordenadas e gerenciadas.
+
+
+## Integração com Backend  
+Todos os dados da aplicação são obtidos e manipulados por meio de uma API backend. Os endpoints são consumidos via requisições HTTP, garantindo que o sistema mantenha persistência das informações e funcione de forma dinâmica.  
+
 
 ## Como Rodar o Projeto
 
