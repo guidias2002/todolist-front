@@ -15,7 +15,7 @@ const OrderTasksByDueDate: React.FC<OrderTasksProps> = ({ onOrder }) => {
             onClick={onOrder}
             className="h-12 py-2 flex items-center gap-2 whitespace-nowrap"
         >
-            Ordenar todas por data
+            Ordenar por data de vencimento
         </Button>
     );
 };
