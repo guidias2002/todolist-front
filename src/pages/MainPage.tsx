@@ -11,7 +11,7 @@ import { SelectableTaskStatus } from "../shared/enums/TaskStatusEnum";
 import { Button } from "@mui/material";
 import { useAuth } from "../providers/AuthProvider";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import TaskForm from "../components/TaskForm";
+import TaskForm from "../components/TaskCreateForm";
 
 export default function MainPage() {
     const [selectedStatus, setSelectedStatus] = useState<SelectableTaskStatus>(SelectableTaskStatus.TODAS);
@@ -87,8 +87,6 @@ export default function MainPage() {
                         >
                             Adicionar tarefa
                         </Button>
-
-
 
                         <TaskForm open={openForm} handleClose={handleCloseForm} />
                     </div>

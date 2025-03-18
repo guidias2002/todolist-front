@@ -4,6 +4,7 @@ import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import { Alert, Divider, Snackbar } from "@mui/material";
 import useDeleteTask from "../hooks/useDeleteTask";
 import { useState } from "react";
+import TaskUpdateForm from "./TaskUpdateForm";
 
 interface CardTaskProps {
     task: Task;
@@ -12,12 +13,13 @@ interface CardTaskProps {
 export default function CardTask({ task }: CardTaskProps) {
     const userIdLogged = JSON.parse(localStorage.getItem("user") || '{}').id;
     const [toast, setToast] = useState({ open: false, message: "", severity: "success" });
+    const [openForm, setOpenForm] = useState(false);
+    const [taskToEdit, setTaskToEdit] = useState<Task>();
 
     const { deleteTask } = useDeleteTask();
 
     const handleDeleteTask = (taskId: number, userId: number) => {
         if (userId !== task.userId) {
-            console.log("Apenas o criador da tarefa pode exclui-lá")
             setToast({ open: true, message: "Apenas o criador da tarefa pode exclui-lá.", severity: "error" });
             return;
         }
@@ -26,6 +28,21 @@ export default function CardTask({ task }: CardTaskProps) {
         window.location.reload();
         setToast({ open: true, message: "Tarefa excluída.", severity: "success" });
     }
+
+    const handleOpenEditForm = (taskId: number, userId: number) => {
+        if (task.userId !== userIdLogged) {
+            setToast({ open: true, message: "Apenas o criador da tarefa pode editá-la.", severity: "error" });
+            return;
+        }
+
+        setTaskToEdit(task);
+        setOpenForm(true);
+    };
+
+    const handleCloseForm = () => {
+        setOpenForm(false);
+        setTaskToEdit(undefined);
+    };
 
     return (
         <div className="flex flex-col justify-between h-full p-4 bg-white rounded-2xl shadow-md border border-gray-200">
@@ -61,6 +78,11 @@ export default function CardTask({ task }: CardTaskProps) {
 
                 <div className="flex gap-3">
                     <BorderColorTwoToneIcon
+                        onClick={() => {
+                            if (task.id !== undefined && userIdLogged !== undefined) {
+                                handleOpenEditForm(task.id, userIdLogged);
+                            }
+                        }}
                         className="text-black text-3xl cursor-pointer p-1 rounded-md hover:bg-gray-200 transition"
                     />
                     <DeleteTwoToneIcon
@@ -74,11 +96,19 @@ export default function CardTask({ task }: CardTaskProps) {
                 </div>
             </div>
 
+            {openForm && taskToEdit && (
+                <TaskUpdateForm
+                    open={openForm}
+                    handleCloseForm={handleCloseForm}
+                    task={taskToEdit}
+                />
+            )}
+
             <Snackbar
                 open={toast.open}
                 autoHideDuration={3000}
                 onClose={() => setToast({ ...toast, open: false })}
-                anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
             >
                 <Alert onClose={() => setToast({ ...toast, open: false })} severity={toast.severity as any} variant="filled">
                     {toast.message}

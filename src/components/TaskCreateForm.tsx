@@ -17,7 +17,7 @@ interface TaskFormProps {
 }
 
 
-export default function TaskForm({ open, handleClose }: TaskFormProps) {
+export default function TaskCrateForm({ open, handleClose }: TaskFormProps) {
     const userIdLogged = JSON.parse(localStorage.getItem("user") || '{}').id;
     const { mutate: createTask } = useCreateTask();
     const [toast, setToast] = useState({ open: false, message: "", severity: "success" });
@@ -194,7 +194,7 @@ export default function TaskForm({ open, handleClose }: TaskFormProps) {
                 open={toast.open}
                 autoHideDuration={3000}
                 onClose={() => setToast({ ...toast, open: false })}
-                anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
             >
                 <Alert onClose={() => setToast({ ...toast, open: false })} severity={toast.severity as any} variant="filled">
                     {toast.message}
