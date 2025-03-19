@@ -15,7 +15,7 @@ Este projeto é um sistema de gerenciamento de tarefas desenvolvido com React e 
 
 ### Cadastro de Usuários
 - Criar uma conta (registro com nome, e-mail e senha) ✅
-- Tela de login com e-mail e senha ✅
+- Tela de login com e-mail e senha ✅ (optei por criar a tela de login para verificar o usuário que está logado, pois para editar e deletar uma tarefa, é preico verificar o usuário que está tentando executar a ação. Essa foi uma forma mais mais simples e eficiente para fazer a verificação no frontend)
 
 ### Gerenciamento de Tarefas
 - Criar, editar, excluir e listar tarefas ✅
