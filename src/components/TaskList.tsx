@@ -27,8 +27,8 @@ export default function TaskList({ tasksList, error, loading }: TaskListProps) {
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {tasksList.map((task) => (
-                <div className="h-[200px]">
-                    <CardTask key={task.id} task={task} />
+                <div key={task.id} className="h-[200px]">
+                    <CardTask task={task} />
                 </div>
             ))}
         </div>
