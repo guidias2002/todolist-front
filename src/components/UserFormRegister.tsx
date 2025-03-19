@@ -77,7 +77,7 @@ export default function UserFormRegister() {
     };
 
     return (
-        <div className="flex flex-col gap-4 w-96">
+        <div className="flex flex-col gap-4 w-full max-w-sm">
             <TextField
                 id="name"
                 name="name"
